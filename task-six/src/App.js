@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
@@ -12,6 +12,7 @@ import Products from "./pages/Products";
 import Services from "./pages/Services";
 
 function App() {
+  const [isLoggedIn,setIsLoggedIn] = useState(false)
   return (
     <div className="App">
       <NavigationMenu />
@@ -27,10 +28,12 @@ function App() {
           <Route path="products" element={<Products />}/>
           <Route  path="services" element={<Services />}/>
         </Route>
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/contact" element={isLoggedIn?<Contact /> : <Navigate to='/login' />} />
       </Routes>
     </div>
   );
 }
 
 export default App;
+
+
